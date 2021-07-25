@@ -1,7 +1,9 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,6 +14,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static helpers.AttachmentsHelper.*;
 
 public class StudentRegistrationFormTest {
 
@@ -25,6 +28,17 @@ public class StudentRegistrationFormTest {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.remote = "https://user1:1234@" + System.getProperty("remote.browser.url") + "/wd/hub";
+    }
+
+    @AfterEach
+    @Step("Attachments")
+    public void afterEach(){
+        attachScreenshot("Last screenshot");
+        attachPageSource();
+        attachAsText("Browser console logs", getConsoleLogs());
+        attachVideo();
+
+        closeWebDriver();
     }
 
     @Test
