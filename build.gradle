@@ -16,9 +16,9 @@ repositories {
 }
 
 ext {
-    allureVersion = "2.13.7"
-    selenideVersion = "5.16.2"
-    junitVersion = "5.7.0"
+    allureVersion = "2.14.0"
+    selenideVersion = "5.22.1"
+    junitVersion = "5.7.1"
 }
 
 allure {
@@ -35,14 +35,15 @@ compileTestJava {
 }
 
 dependencies {
-    testImplementation "org.aspectj:aspectjweaver:1.9.5"
-    testImplementation "com.codeborne:selenide:${selenideVersion}"
-    testImplementation "io.qameta.allure:allure-selenide:${allureVersion}"
-    testImplementation "ch.qos.logback:logback-classic:1.2.3"
+    testImplementation (
+            "org.aspectj:aspectjweaver:1.9.5",
+            "com.codeborne:selenide:${selenideVersion}",
+            "io.qameta.allure:allure-selenide:${allureVersion}",
+            "ch.qos.logback:logback-classic:1.2.3",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}")
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-
+    testRuntimeOnly (
+            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 test {
